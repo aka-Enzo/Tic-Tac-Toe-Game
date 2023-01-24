@@ -31,7 +31,7 @@ const gameBoard = (() => {
         for (let i = 0; i < _board.length; i++) {
             const field = _board[i];
             if (field == undefined) {
-                field.push(i);
+                fields.push(i);
             }
         }
         return fields;
@@ -57,7 +57,7 @@ const Player = (sign) => {
     const getSign = () => _sign;
     const setSign = (sign, active) => {
         _sign = sign;
-        const p = document.querySelector(`.btn-p.${sign.toLowercase()}`);
+        const p = document.querySelector(`.btn-p.${sign.toLowerCase()}`);
         if (active) {
             p.classList.add('selected');
             p.classList.remove('non-selected');
@@ -457,4 +457,7 @@ const displayController = (() => {
         makeBodyRestart
     }
 })();
+
+// To highlight the box at start
+gameController.changeSign('X')
 
