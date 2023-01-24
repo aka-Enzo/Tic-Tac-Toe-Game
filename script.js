@@ -51,3 +51,23 @@ const gameBoard = (() => {
         clear
     }
 })();
+
+const player = (sign) => {
+    let _sign = sign;
+    const getSign = () => _sign;
+    const setSign = (sign, active) => {
+        _sign = sign;
+        const p = document.querySelector(`.btn-p.${sign.toLowercase()}`);
+        if (active) {
+            p.classList.add('selected');
+            p.classList.remove('non-selected');
+        } else {
+            p.classList.remove('selected');
+            p.classList.add('non-selected');
+        }
+    }
+    return {
+        getSign,
+        setSign
+    }
+}
