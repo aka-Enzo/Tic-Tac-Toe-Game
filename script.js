@@ -71,3 +71,33 @@ const player = (sign) => {
         setSign
     }
 }
+const minimaxAiLogic = ((percentage) => {
+    let aiPrecision = percentage;
+    const setAiPercentage = (percentage) => {
+        aiPrecision = percentage;
+    }
+    const getAiPercentage = () => {
+        return aiPrecision;
+    }
+
+    // AI selects the next move
+    const chooseField = () => {
+        const value = Math.floor(Math.random() * (100 + 1));
+        // if the random number is smaller than AI threshold it finds the best move
+        let choice = null;
+        if (value <= aiPrecision) {
+            choice = minimax(gameBoard, gameController.getAiPlayer()).index;
+            const field = gameBoard.getField(choice);
+            if (field != undefined) {
+                return "Error";
+            } 
+        } else {
+            const getEmptyFieldsIdx = gameBoard.getEmptyFieldsIdx();
+            let noBestMove = Math.floor(Math.random() * getEmptyFieldsIdx.length);
+            choice = getEmptyFieldsIdx[noBestMove];
+        }
+        return choice;
+    }
+
+    
+})
