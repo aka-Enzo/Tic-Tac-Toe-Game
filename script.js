@@ -135,7 +135,7 @@ const minimaxAiLogic = ((percentage) => {
             }
         }
 
-        let move = [];
+        let moves = [];
 
         for (let i = 0; i < empty.length; i++) {
             let move = {};
@@ -155,7 +155,7 @@ const minimaxAiLogic = ((percentage) => {
 
             // reset the tile value 
             newBoard.setFieldForAiLogic(empty[i], undefined);
-            move.push(move);
+            moves.push(move);
         }
 
         return findBestMove(moves, player);
