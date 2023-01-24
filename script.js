@@ -120,4 +120,52 @@ const minimaxAiLogic = ((percentage) => {
         }
         return moves[bestMove];
     }
-})
+
+    const minimax = (newBoard, player) => {
+        let empty = newBoard.getEmptyFieldsIdx();
+        if (gameController.checkForDraw(newBoard)) {
+            return {score: 0};
+        }
+        else if (gameController.checkForWin(newBoard)) {
+            if (player.getSign() == gameController.getHumanPlayer().getSign()) {
+                return {score: 10};
+            }
+            else if (player.getSign() == gameController.getAiPlayer().getSign()) {
+                return {score: -10};
+            }
+        }
+
+        let move = [];
+
+        for (let i = 0; i < empty.length; i++) {
+            let move = {};
+            move.index = empty[i];
+
+            //change the tile value to the player or AI sign
+            newBoard.setFieldForAiLogic(empty[i], player);
+
+            //call minimax for the opposite player
+            if (player.getSign() == gameController.getAiPlayer().getSign()) {
+                let result = minimax(newBoard, gameController.getHumanPlayer());
+                move.score = result.score;
+            } else {
+                let result = minimax(newBoard, gameController.getAiPlayer());
+                move.score = result.score;
+            }
+
+            // reset the tile value 
+            newBoard.setFieldForAiLogic(empty[i], undefined);
+            move.push(move);
+        }
+
+        return findBestMove(moves, player);
+    }
+
+    return {
+        minimax, 
+        chooseField,
+        getAiPercentage,
+        setAiPercentage
+    }
+})(0);
+
