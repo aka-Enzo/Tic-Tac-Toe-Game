@@ -92,12 +92,32 @@ const minimaxAiLogic = ((percentage) => {
                 return "Error";
             } 
         } else {
-            const getEmptyFieldsIdx = gameBoard.getEmptyFieldsIdx();
-            let noBestMove = Math.floor(Math.random() * getEmptyFieldsIdx.length);
-            choice = getEmptyFieldsIdx[noBestMove];
+            const emptyFieldsIdx = gameBoard.getEmptyFieldsIdx();
+            let noBestMove = Math.floor(Math.random() * emptyFieldsIdx.length);
+            choice = emptyFieldsIdx[noBestMove];
         }
         return choice;
     }
 
-    
+    const findBestMove = (moves, player) => {
+        let bestMove;
+        if (player === gameController.getAiPlayer()) {
+            let bestScore = -10000;
+            for (let i = 0; i < moves.length; i++) {
+                if (moves[i].score > bestScore) {
+                    bestScore = moves[i].score;
+                    bestMove = i;
+                }
+            }
+        } else {
+            let bestScore = 10000;
+            for (let i = 0; i < moves.length; i++) {
+                if (moves[i].score < bestScore) {
+                    bestScore = moves[i].score;
+                    bestMove = i;
+                }
+            }
+        }
+        return moves[bestMove];
+    }
 })
