@@ -378,4 +378,83 @@ const gameController = (() => {
     }
 })();
 
+const displayController = (() => {
+    const htmlBoard = Array.from(document.querySelectorAll('button.field'));
+    const form = document.querySelector('.form');
+    const restart = document.querySelector('.restart');
+    const x = document.querySelector('.x');
+    const o = document.querySelector('.o');
+
+    const _changeAI = () => {
+        const value = document.querySelector('#levels').value;
+        if (value == 'easy') {
+            minimaxAiLogic.setAiPercentage(0);
+        }
+        else if (value == 'medium') {
+            minimaxAiLogic.setAiPercentage(75);
+        }
+        else if (value == 'hard') {
+            minimaxAiLogic.setAiPercentage(90);
+        }
+        else if (value == 'unbeatable') {
+            minimaxAiLogic.setAiPercentage(100);
+        }
+        gameController.restart();
+    }
+
+    const _changePlayerSign = (sign) => {
+        gameController.changeSign(sign);
+        gameController.restart();
+    }
+
+    const clear = () => {
+        htmlBoard.forEach(field => {
+            const p = field.childNodes[0];
+            p.classList = [];
+            p.textContent = '';
+        });
+    }
+
+
+    const deactivate = () => {
+        htmlBoard.forEach(field => {
+            field.setAttribute('disabled', '');
+        });
+    }
+
+    const activate = () => {
+        htmlBoard.forEach(field => {
+
+            field.removeAttribute('disabled');
+        });
+    }
+
+    const makeBodyRestart = () =>{
+        const body = document.querySelector('body');
+        body.addEventListener('click', gameController.restart);
+        
+    }
+
+    const _init = (() => {
+        for (let i = 0; i < htmlBoard.length; i++) {
+            field = htmlBoard[i];
+            field.addEventListener('click', gameController.playerStep.bind(field, i));
+        }
+
+        form.addEventListener('change', _changeAI);
+
+        restart.addEventListener('click', gameController.restart);
+
+        x.addEventListener('click', _changePlayerSign.bind(this, 'X'));
+
+        o.addEventListener('click', _changePlayerSign.bind(this, 'O'));
+    })();
+
+    return {
+        deactivate,
+        activate,
+        clear,
+        makeBodyRestart
+    }
+})();
 
