@@ -1,0 +1,19 @@
+:root {
+    --black: rgb(0, 0, 0);
+    --pink: rgb(255, 79, 187);
+    --green: rgb(26, 224, 175);
+    --purple: rgb(167, 34, 219);
+}
+
+
+body {
+    font-family: 'Fredoka One', cursive;
+}
+
+.item {
+    margin: 0.4em;
+}
+
+.board {
+    background-color: var(--black);
+}
