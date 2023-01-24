@@ -3,11 +3,20 @@
     --pink: rgb(255, 79, 187);
     --green: rgb(26, 224, 175);
     --purple: rgb(167, 34, 219);
+    --white: rgb(241, 241, 241);
 }
 
 
 body {
     font-family: 'Fredoka One', cursive;
+}
+
+#x {
+    color: var(--green);
+}
+
+#o {
+    color:var(--pink);
 }
 
 .item {
@@ -16,4 +25,82 @@ body {
 
 .board {
     background-color: var(--black);
+    display: grid;
+    grid-template-rows: repeat(3, 100px);
+    grid-template-columns: repeat(3, 100px);
+    width: 100%;
+    padding: 1em 0 1em 0;
+    margin-bottom: 0;
+    justify-content: center;
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 60%;
+    margin: auto;
+    border: 1px solid var(--purple);
+    box-shadow: 0 0 10px var(--pink);
+}
+
+.field {
+    font-size: 60px;
+    background-color: var(--black);
+    border: none;
+    color: var(--green);
+    border-bottom: 3px solid var(--white);
+    border-right: 3px solid var(--white);
+    outline: none;
+}
+
+.field.no-r {
+    border-right: none;
+}
+
+.field.no-b {
+    border-bottom: none;
+}
+
+.field p {
+    margin: 0px;
+}
+
+.field:hover {
+    cursor: pointer;
+}
+
+.btn {
+    background-color: var(--white);
+    border: 1px outset var(--purple);
+    border-radius: 10px;
+    -webkit-box-shadow: -1px 7px 22px -6px lightgrey;
+    box-shadow: -1px 7px 22px -6px lightgrey;
+}
+
+.btn:focus {
+    outline: none;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+.select {
+    align-self: flex-start;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 0px;
+}
+
+.btn p {
+    width: 15em;
+    height: 2.5em;
+    margin: 1em 1em 1em 1em;
+}
+
+.selected {
+    color: var(--white);
+    border: 2px solid var(--purple)
 }
